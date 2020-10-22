@@ -10,10 +10,36 @@
 
 var listaMine = [];
 var leMiePosizioni = [];
+var numBombe = 16;
+var minBombe = 1;
+var maxPoint = maxBombe - numBombe;
 
-while (listaMine.length < 16) {
+// BONUS: devo chiedere all'utente con quale livello di gioco vuole proseguire
+do {
+    var sceltaLivello = parseInt(prompt("Con quale livello di difficoltà vuoi continuare? Digita 0 per il livello base; Digita 1 per il livello intermedio; Digita 2 per il livello difficile"));
 
-    var minaRandom = getRndInteger (1, 100);
+    // devo verificare se l'utente inserisce un numero ed eventualmente creare un alert
+    // if (isNan (sceltaLivello)) {
+    //     alert("Scegli il livello inserendo 0 per il livello base, 1 per il livello intermedio, 2 per il livello difficile");
+    // }
+} while (!(sceltaLivello <=2 && sceltaLivello >= 0));
+
+// Devo adesso impostare i valori a secoda del livello di gioco scelto dall'utente
+if (sceltaLivello == 0) {
+    var maxBombe = 100;
+    console.log(0);
+} else if (sceltaLivello == 1) {
+    var maxBombe = 80;
+    console.log(1);
+} else {
+    var maxBombe = 50;
+    console.log(2);
+}
+
+
+while (listaMine.length < numBombe) {
+
+    var minaRandom = getRndInteger (1, maxBombe);
     // verifico se bomba è già presente nell'array
     // la inserisco solo se non è presente
     if (listaMine.includes(minaRandom) == false) {
@@ -21,7 +47,7 @@ while (listaMine.length < 16) {
     }
 
 }
-console.log("lista mine :", listaMine);
+console.log("lista mine :" + listaMine);
 
 // chiedere numero ad utente e verificare se già presente nella lista mine
 // se presente gioco finisce e viene comunicato risultato
@@ -30,8 +56,17 @@ var isBombaTrovata = false;
 
 
 do {
+    // devo chiedere numero ad utente
+    var laMiaScelta = parseInt(prompt("Inserisci un numero da" +minBombe+ "a" +maxBombe));
+    // devo verificare se numero
+    // if(isNan (laMiaScelta)){
+    //     alert("Inserisci un numero");
+    // }
 
-    var laMiaScelta = parseInt(prompt("Inserisci un numero"));
+    // devo creare un alert se l'utente inserisce un numero superiore a maxbombe
+    if (!(laMiaScelta <= maxBombe && laMiaScelta >= minBombe)) {
+        alert ("Si possono solo inserire i numeri da 1 a 100");
+    }
 
     // verificare che la mia scelta non sia presente nell'array delle mine
     // listaMine.includes(laMiaScelta) == false)
